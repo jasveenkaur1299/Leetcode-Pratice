@@ -8,7 +8,10 @@ public:
         cout<<second;
         while(first<second)
         {
-           swap(s[first],s[second]);
+          temp=s[first];
+           s[first]=s[second];
+            s[second]=temp;
+                
             first++;
             second--;
         }
