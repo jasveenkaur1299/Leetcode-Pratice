@@ -20,10 +20,9 @@ public:
         if(root==NULL)
             return 0;
         int lefth=height(root->left);
-        if(lefth==-1) return -1;
         
         int righth=height(root->right);
-        if(righth==-1) return -1;
+        if(righth==-1 || lefth==-1) return -1;
         
         if(abs(lefth - righth)>1) return -1;
         return 1+ max(righth,lefth);
