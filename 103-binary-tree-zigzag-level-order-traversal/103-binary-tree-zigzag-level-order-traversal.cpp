@@ -35,9 +35,9 @@ public:
             
             row[index]=front->val;
            
-            if(front->left!=NULL) 
+            if(front->left) 
                 q.push(front->left);
-            if(front->right!=NULL)
+            if(front->right)
                 q.push(front->right);
             
         }
