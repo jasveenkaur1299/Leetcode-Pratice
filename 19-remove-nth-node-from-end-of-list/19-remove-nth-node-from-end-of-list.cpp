@@ -31,9 +31,9 @@ public:
        int difference = count - n;
       int counter=1;
       temp=head;
-      while(counter!=difference)
+      while(--difference)
       {
-          counter++;
+          //counter++;
           temp=temp->next;
       }
         
