@@ -9,14 +9,18 @@
 class Solution {
 public:
     bool hasCycle(ListNode *head) {
-        ListNode* slow=head;
-        ListNode* fast=head;
-        while(fast!=NULL && fast->next!=NULL)
+        unordered_set<ListNode*> set;
+        if(head==NULL ||head->next==NULL)
+            return false;
+        ListNode*temp=head;
+        while(temp!=NULL)
         {
-            fast=fast->next->next;
-            slow=slow->next;
-            if(fast==slow)
+           // cout<<temp->val<<" ";
+            if(set.find(temp)!=set.end())
                 return true;
+            else
+                set.insert(temp);
+            temp=temp->next;
         }
         return false;
         
