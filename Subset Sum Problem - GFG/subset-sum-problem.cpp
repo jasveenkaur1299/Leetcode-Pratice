@@ -9,20 +9,35 @@ using namespace std;
 
 class Solution{   
 public:
-    int SubsetSum(vector<int>arr, int sum,int n,vector<vector<int>>&dp){
-      if(sum==0)
-      return true;
-      if(n==0 && sum!=0)
-      return false;
-      if(dp[n][sum]!=-1) return dp[n][sum];
-      if(sum>=arr[n-1])
-      return dp[n][sum]=SubsetSum(arr,sum-arr[n-1],n-1,dp)||SubsetSum(arr,sum,n-1,dp);
-      return dp[n][sum]=SubsetSum(arr,sum,n-1,dp);
-    }
     bool isSubsetSum(vector<int>arr, int sum){
         int n=arr.size();
         vector<vector<int>>dp(n+1,vector<int>(sum+1,-1));
-       return SubsetSum(arr,sum,n,dp); 
+        for(int i=0;i<n+1;i++)
+        {
+            for(int j=0;j<sum+1;j++)
+            {
+                if(i==0) dp[i][j]=0;
+                if(j==0) dp[i][j]=1;
+                
+            }
+        }
+        
+          for(int i=1;i<n+1;i++)
+        {
+            for(int j=1;j<sum+1;j++)
+            {     
+               
+                if(j>=arr[i-1])
+                {
+                    dp[i][j]=dp[i-1][j-arr[i-1]] || dp[i-1][j];
+                }
+                 if(j<arr[i-1])
+                {
+                    dp[i][j]=dp[i-1][j];
+                }
+            }
+        }
+       return dp[n][sum]; 
     }
 };
 
