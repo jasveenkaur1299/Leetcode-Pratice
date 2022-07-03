@@ -1,18 +1,6 @@
 class Solution {
 public:
-    int SubsetSum(vector<int> nums,int sum,int n,vector<vector<int>>& dp){
-        if(sum==0)
-            return true;
-        if(n==0)
-            return false;
-        if(dp[n][sum]!=-1) return dp[n][sum];
-        if(nums[n-1]<=sum)
-        {
-            return dp[n][sum]=SubsetSum(nums,sum-nums[n-1],n-1,dp)||SubsetSum(nums,sum,n-1,dp);
-        }
-        else 
-            return dp[n][sum]=SubsetSum(nums,sum,n-1,dp);
-    }
+    
         
     bool canPartition(vector<int>& nums) {
         int sum=0;
@@ -24,10 +12,29 @@ public:
          
         if(sum%2!=0)
             return false;
-        else{ 
+        else{
+            sum=sum/2;
+        vector<vector<int>> dp(n+1,vector<int> (sum+1,-1));    
+        for(int i=0;i<n+1;i++){
+            for(int j=0;j<sum+1;j++){
+                if(i==0)
+                    dp[i][j]=0;
+                if(j==0)
+                    dp[i][j]=1;
+            }
+        }
+            for(int i=1;i<n+1;i++)
+            {
+                for(int j=1;j<sum+1;j++)
+                {
+                    if(nums[i-1]<=j)
+                        dp[i][j]=dp[i-1][j-nums[i-1]] || dp[i-1][j];
+                     else if(nums[i-1]>j)
+                         dp[i][j]=dp[i-1][j];
+                }
+            }
+            return dp[n][sum];
             
-            vector<vector<int>> dp(n+1,vector<int>(sum/2+1,-1));
-            return SubsetSum(nums,sum/2,n,dp);
         }
         
     }
